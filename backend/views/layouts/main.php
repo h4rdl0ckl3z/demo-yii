@@ -40,6 +40,10 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     }     
+    if (isset(Yii::$app->user->isGuest)) {
+        $menuItems[] = ['label' => 'Customers', 'url' => '?r=customers'];
+        $menuItems[] = ['label' => 'e-GP', 'url' => '?r=egprss'];
+    }     
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
         'items' => $menuItems,
