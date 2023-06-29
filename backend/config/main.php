@@ -10,6 +10,7 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
+    'name' => 'E-commerce',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [

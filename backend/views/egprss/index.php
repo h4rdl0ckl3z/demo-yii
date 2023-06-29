@@ -30,8 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             // 'egp_rss_id',
-            'title',
-            'link',
+            // 'title',
+            [
+                'attribute' => 'title',
+                'format' => 'raw',
+                'value' => function($model) {
+                    return Html::a($model -> title, $model -> link, ['target'=>'_blank']);
+                }
+            ],
+            // 'link',
             'pubdate',
             'pubtype',
             // 'customer_id',
