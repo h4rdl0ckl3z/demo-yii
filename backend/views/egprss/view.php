@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'pubdate',
             'pubtype',
             'customer_id',
+            'customer.customer_name',
         ],
     ]) ?>
 

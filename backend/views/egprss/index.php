@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'pubdate',
             'pubtype',
             // 'customer_id',
+            'customer.customer_name',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Egprss $model, $key, $index, $column) {
