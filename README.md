@@ -1,4 +1,4 @@
 # demo-yii
 
 # customer
-  - epg
+  - egp
