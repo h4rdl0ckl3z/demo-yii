@@ -39,6 +39,13 @@ class CustomersController extends Controller
                                 // User::ROLE_ADMIN
                             ],
                         ],
+                        [
+                            'actions' => ['index'],
+                            'allow' => true,
+                            'roles' => [
+                                User::ROLE_USER,
+                            ],
+                        ],
                     ],
                 ],
                 'verbs' => [
