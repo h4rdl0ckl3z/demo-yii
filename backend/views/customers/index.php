@@ -1,7 +1,6 @@
 <?php
 
 use common\models\Customers;
-use common\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -19,14 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?php
-            if (!User::ROLE_USER) {
-                # code...
-            } else {
-                echo Html::a('Create Customers', ['create'], ['class' => 'btn btn-success']);
-            }
-            
-        ?>
+        <?= Html::a('Create Customers', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
