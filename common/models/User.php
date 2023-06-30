@@ -22,12 +22,21 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * @property integer $role
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+
+
+    // Role
+    const ROLE_SUPERADMIN = 1;
+    const ROLE_ADMIN = 2;
+    const ROLE_MODERATOR = 3;
+    const ROLE_MEMBER = 4;
+    const ROLE_USER = 5;
 
 
     /**
@@ -65,6 +74,18 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findIdentity($id)
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function level_roles()
+    {
+        return [
+            ['role', 'default', 'value' => self::ROLE_USER],
+            ['role', 'in', 'range' => [self::ROLE_SUPERADMIN, self::ROLE_ADMIN, self::ROLE_MODERATOR, self::ROLE_MEMBER, self::ROLE_USER]],
+        ];
     }
 
     /**
