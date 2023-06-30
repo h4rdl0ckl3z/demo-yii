@@ -36,7 +36,7 @@ class CustomersController extends Controller
                             'allow' => true,
                             'roles' => [
                                 User::ROLE_SUPERADMIN,
-                                User::ROLE_ADMIN
+                                // User::ROLE_ADMIN
                             ],
                         ],
                     ],

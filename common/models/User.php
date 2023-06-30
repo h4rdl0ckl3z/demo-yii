@@ -65,6 +65,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            ['role', 'default', 'value' => self::ROLE_USER],
+            ['role', 'in', 'range' => [self::ROLE_SUPERADMIN, self::ROLE_ADMIN, self::ROLE_MODERATOR, self::ROLE_MEMBER, self::ROLE_USER]],
         ];
     }
 
@@ -74,18 +76,6 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findIdentity($id)
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function level_roles()
-    {
-        return [
-            ['role', 'default', 'value' => self::ROLE_USER],
-            ['role', 'in', 'range' => [self::ROLE_SUPERADMIN, self::ROLE_ADMIN, self::ROLE_MODERATOR, self::ROLE_MEMBER, self::ROLE_USER]],
-        ];
     }
 
     /**
