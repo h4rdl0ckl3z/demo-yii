@@ -2,8 +2,11 @@
 
 namespace backend\controllers;
 
+use common\components\UserRole;
 use common\models\Egprss;
+use common\models\User;
 use backend\models\EgprssSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,6 +24,23 @@ class EgprssController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'ruleConfig' => [
+                        'class' => UserRole::className(),
+                    ],
+                    'only' => ['create', 'update', 'index', 'delete'],
+                    'rules' => [
+                        [
+                            'actions' => ['create', 'update', 'index', 'delete'],
+                            'allow' => true,
+                            'roles' => [
+                                User::ROLE_SUPERADMIN,
+                                User::ROLE_ADMIN
+                            ],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
