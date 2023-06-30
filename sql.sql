@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 30/06/2023 21:48:15
+ Date: 30/06/2023 21:49:47
 */
 
 SET NAMES utf8mb4;
@@ -125,6 +125,6 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', 'IjpiLuCm06J84KBrgDm95cU6pjjs5cb3', '$2y$13$DwP8.umg2E69n70T6iHE9OrNb83ZENYEu40O1bF7PNQreY1ZpczHO', NULL, 'admin@local.net', 10, 1688008383, 1688008383, 'aExvtkbotCxXmEff8VLhF8wOB5PsghAu_1688008383', 1);
+INSERT INTO `user` VALUES (1, 'sadmin', 'IjpiLuCm06J84KBrgDm95cU6pjjs5cb3', '$2y$13$DwP8.umg2E69n70T6iHE9OrNb83ZENYEu40O1bF7PNQreY1ZpczHO', NULL, 'admin@local.net', 10, 1688008383, 1688008383, 'aExvtkbotCxXmEff8VLhF8wOB5PsghAu_1688008383', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

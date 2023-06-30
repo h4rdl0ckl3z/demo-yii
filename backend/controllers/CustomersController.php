@@ -35,7 +35,8 @@ class CustomersController extends Controller
                             'actions' => ['create', 'update', 'index', 'delete'],
                             'allow' => true,
                             'roles' => [
-                                User::ROLE_SUPERADMIN
+                                User::ROLE_SUPERADMIN,
+                                User::ROLE_ADMIN
                             ],
                         ],
                     ],
