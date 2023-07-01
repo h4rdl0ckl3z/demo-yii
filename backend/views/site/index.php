@@ -51,3 +51,4 @@ $this->title = 'My Yii Application';
 
     </div>
 </div> -->
+<p style="font-size: 100pt;">Home</p>

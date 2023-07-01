@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+use common\models\User;
+
 /** @var yii\web\View $this */
 /** @var common\models\Customers $model */
 
@@ -16,14 +18,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'customer_id' => $model->customer_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'customer_id' => $model->customer_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php
+            if (User::ROLE_SUPERADMIN == Yii::$app->user->identity->getRole())
+            echo Html::a('Update', ['update', 'customer_id' => $model->customer_id], ['class' => 'btn btn-primary']);
+        ?>
+        <?php
+            if (User::ROLE_SUPERADMIN == Yii::$app->user->identity->getRole())
+            echo Html::a('Delete', ['delete', 'customer_id' => $model->customer_id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ])
+        ?>
     </p>
 
     <?= DetailView::widget([
