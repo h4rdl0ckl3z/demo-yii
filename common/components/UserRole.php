@@ -8,19 +8,19 @@ class UserRole extends AccessRule
 {
     protected function matchRole($user)
     {
-        if(empty($this->roles)){
+        if (empty($this->roles)) {
             return true;
         }
-        foreach($this->roles as $role){
-            if($role === '?'){
-                if($user->getIsGuest()){
+        foreach ($this->roles as $role) {
+            if ($role === '?') {
+                if ($user->getIsGuest()) {
                     return true;
                 }
-            }else if($role === '@'){
-                if(!$user->getIsGuest()){
+            } else if ($role === '@') {
+                if (!$user->getIsGuest()) {
                     return true;
                 }
-            }else if(!$user->getIsGuest() && $role === $user->identity->role){
+            } else if (!$user->getIsGuest() && $role === $user->identity->role) {
                 return true;
             }
         }
