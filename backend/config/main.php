@@ -51,7 +51,7 @@ return [
             // Disable index.php
             'showScriptName' => false,
             // Disable r= routes
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => false,
             'rules' => [
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

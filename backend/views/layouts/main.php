@@ -40,8 +40,8 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Customers', 'url' => '/backend/web/customers/index'];
-        $menuItems[] = ['label' => 'e-GP', 'url' => '/backend/web/egprss/index'];
+        $menuItems[] = ['label' => 'Customers', 'url' => ['/customers/index']];
+        $menuItems[] = ['label' => 'e-GP', 'url' => ['/egprss/index']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],

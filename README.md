@@ -1,3 +1,5 @@
+# Simple System
+
 # demo-yii (E-commerce Control Panel)
 
 # How to install
@@ -13,3 +15,8 @@
 # customer
   - customer id
   - egp
+
+
+sadmin:123456za
+admin:123456za
+test:123456za

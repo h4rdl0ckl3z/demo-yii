@@ -2,19 +2,16 @@
 
 namespace backend\controllers;
 
-use common\components\UserRole;
-use common\models\Customers;
 use common\models\User;
-use backend\models\CustomersSearch;
-use yii\filters\AccessControl;
+use backend\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CustomersController implements the CRUD actions for Customers model.
+ * UserController implements the CRUD actions for User model.
  */
-class CustomersController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritDoc
@@ -24,30 +21,6 @@ class CustomersController extends Controller
         return array_merge(
             parent::behaviors(),
             [
-                'access' => [
-                    'class' => AccessControl::class,
-                    'ruleConfig' => [
-                        'class' => UserRole::className(),
-                    ],
-                    'only' => ['create', 'update', 'index', 'delete'],
-                    'rules' => [
-                        [
-                            'actions' => ['create', 'update', 'index', 'delete'],
-                            'allow' => true,
-                            'roles' => [
-                                User::ROLE_SUPERADMIN,
-                                // User::ROLE_ADMIN
-                            ],
-                        ],
-                        [
-                            'actions' => ['index'],
-                            'allow' => false,
-                            'roles' => [
-                                User::ROLE_USER,
-                            ],
-                        ],
-                    ],
-                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -59,13 +32,13 @@ class CustomersController extends Controller
     }
 
     /**
-     * Lists all Customers models.
+     * Lists all User models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new CustomersSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -75,30 +48,30 @@ class CustomersController extends Controller
     }
 
     /**
-     * Displays a single Customers model.
-     * @param int $customer_id Customer ID
+     * Displays a single User model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($customer_id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($customer_id),
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Customers model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Customers();
+        $model = new User();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'customer_id' => $model->customer_id]);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -110,18 +83,18 @@ class CustomersController extends Controller
     }
 
     /**
-     * Updates an existing Customers model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $customer_id Customer ID
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($customer_id)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($customer_id);
+        $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'customer_id' => $model->customer_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -130,29 +103,29 @@ class CustomersController extends Controller
     }
 
     /**
-     * Deletes an existing Customers model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $customer_id Customer ID
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($customer_id)
+    public function actionDelete($id)
     {
-        $this->findModel($customer_id)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Customers model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $customer_id Customer ID
-     * @return Customers the loaded model
+     * @param int $id ID
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($customer_id)
+    protected function findModel($id)
     {
-        if (($model = Customers::findOne(['customer_id' => $customer_id])) !== null) {
+        if (($model = User::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

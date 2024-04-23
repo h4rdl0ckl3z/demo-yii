@@ -11,18 +11,17 @@ use yii\web\IdentityInterface;
 /**
  * User model
  *
- * @property integer $id
+ * @property int $id
  * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $verification_token
- * @property string $email
  * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
- * @property integer $role
+ * @property string $password_hash
+ * @property string|null $password_reset_token
+ * @property string $email
+ * @property int $status
+ * @property int $created_at
+ * @property int $updated_at
+ * @property string|null $verification_token
+ * @property int $role
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -63,10 +62,37 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'role'], 'required'],
+            [['status', 'created_at', 'updated_at', 'role'], 'integer'],
+            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
+            [['password_reset_token'], 'unique'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
             ['role', 'default', 'value' => self::ROLE_USER],
             ['role', 'in', 'range' => [self::ROLE_SUPERADMIN, self::ROLE_ADMIN, self::ROLE_MODERATOR, self::ROLE_MEMBER, self::ROLE_USER]],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'email' => 'Email',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'verification_token' => 'Verification Token',
+            'role' => 'Role',
         ];
     }
 
