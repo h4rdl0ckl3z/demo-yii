@@ -8,6 +8,8 @@
   
   composer require yiisoft/yii2
 
+  php init
+
 # customer
   - customer id
   - egp
